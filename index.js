@@ -7,17 +7,17 @@ const app = express();
 
 // Configure CORS to allow requests from the client
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000', // Allow requests from this origin
+  origin: process.env.CLIENT_URL?.split(',') || 'http://localhost:3000',
   methods: ['GET', 'POST'],
-  credentials: true // Allow credentials if needed
+  credentials: true
 }));
 
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000', // Allow requests from this origin
+    origin: process.env.CLIENT_URL?.split(',') || 'http://localhost:3000',
     methods: ['GET', 'POST'],
-    credentials: true // Allow credentials if needed
+    credentials: true
   }
 });
 
